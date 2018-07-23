@@ -9,25 +9,52 @@
     </script>
 }
 
-<div class="form-horizontal">
-    <h4>Login Request</h4>
-    <hr />
-    <div class="form-group">
-        <span class="control-label col-md-2">User Name</span>
-        <div class="col-md-10">
-            <input name="Username" type="text" class="form-control" id="txtUserName" />
-        </div>
-    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-horizontal">
+                <h4>Login Request</h4>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        User Name : <input name="Username" type="text" class="form-control" id="txtUserName" />
+                    </div>
+                </div>
 
-    <div class="form-group">
-        <span class="control-label col-md-2">Password</span>
-        <div class="col-md-10">
-            <input name="Password" type="password" class="form-control" id="txtPassword" />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        Password : <input name="Password" type="password" class="form-control" id="txtPassword" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input onclick="Login.ValidateForm()" type="button" value="Submit" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input onclick="Login.ValidateForm()" type="button" value="Submit" class="btn btn-default" />
+        <div class="col-xs-6">
+            <div class="form-horizontal">
+                <h4>Secured Resources</h4>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <b>Auth-Token : </b><span style="word-wrap:break-word" id="lblAuthToken"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <ul>
+                            <li>
+                                <a action="http://localhost:55973/api/home" class="lnkSecureResource" href="#">Link-1</a>
+                            </li>
+                            <li>
+                                <a action="http://localhost:55973/api/home/1" class="lnkSecureResource" href="#">Link-1</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

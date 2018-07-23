@@ -22,9 +22,8 @@ namespace ChurchKioskAPI.Controllers
         /// <param name="login"></param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult Authenticate(string param)
+        public IHttpActionResult Authenticate([FromBody] LoginRequest login)
         {
-            LoginRequest login= JsonConvert.DeserializeObject<LoginRequest>(param);
             var loginResponse = new LoginResponse { };
             LoginRequest loginrequest = new LoginRequest { };
             loginrequest.Username = login.Username.ToLower();

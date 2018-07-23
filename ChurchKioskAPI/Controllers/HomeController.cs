@@ -7,9 +7,16 @@ namespace ChurchKioskAPI.Controllers
     public class HomeController : ApiController
     {
         // GET: api/Home
+        [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "I'm a secured resource!" };
+            return new string[] { "Get() : Method of HomeController!" };
+        }
+
+        [HttpGet]
+        public IEnumerable<string> GetById(string id)
+        {
+            return new string[] { "GetById(string id) : Method of HomeController!" };
         }
     }
 }

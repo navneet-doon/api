@@ -1,6 +1,22 @@
-﻿$(function () { });
+﻿$(function () {
+    Login.InIt();
+});
 
 var Login = {
+
+    InIt:function(){
+        if (sessionStorage.AuthToken == undefined) {
+            $('#lblAuthToken').text('There is no auth-token available, you need to login first!');
+        }
+        else {
+            $('#lblAuthToken').text(sessionStorage.AuthToken);
+        }
+
+        //****************************** Register secured link click events *******************************
+        $('.lnkSecureResource').click(function () {
+            Login.GoToSecureResources($(this).attr('action'));
+        });
+    },
 
     ValidateForm: function () {
         let _userName = $('#txtUserName').val().trim();
@@ -16,7 +32,7 @@ var Login = {
     },
 
     SubmitData: function (data) {
-        debugger;
+        //debugger;
         $.ajax({
             url: location.protocol + "//" + location.hostname + ":" + location.port + "/api/auth",
             type: 'POST',
@@ -24,29 +40,36 @@ var Login = {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             error: function (xhr, status, error) {
-                debugger;
+                //debugger;
             },
             success: function (result) {
-                debugger;
+                //debugger;
                 sessionStorage.AuthToken = result;
-                Login.GoToSecureResources();
+                $('#lblAuthToken').text(sessionStorage.AuthToken);
+                $(':password').val(''); $(':text').val('');
             }
         });
     },
 
-    GoToSecureResources: function () {
+    GoToSecureResources: function (_url) {
+        //debugger;
         $.ajax({
-            url: location.protocol + "//" + location.hostname + ":" + location.port + "/api/home",
+            url: _url,
             type: 'GET',
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", sessionStorage.AuthToken);
+                if (sessionStorage.AuthToken != undefined)
+                    xhr.setRequestHeader("Authorization", sessionStorage.AuthToken);
             },
             error: function (xhr, status, error) {
-                debugger;
-                location.href = $_UnauthorizedUser;
+                //debugger;
+                if (xhr.status == 401) {
+                    alert(xhr.responseJSON.Message);
+                }
             },
             success: function (result) {
-                debugger;
+                //debugger;
+                console.log(result);
+                alert(result);
             }
         });
     }
